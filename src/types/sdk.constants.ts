@@ -1,0 +1,51 @@
+export enum LumiaSDKCommandTypes {
+    ALERT = 'alert', // value: { alert: AlertTypes, variation?: string }
+    MIDI = 'midi', // value: { port: number, type: MIDI_COMMANDS, channel: number, note: MIDI_NOTES_TYPES, velocity: number }
+    OSC = 'osc',
+    ARTNET = 'artnet', // value: { presetName: string; device?: string; univers: string | number, values: IArtnetChannelValues[] }
+    RGB_COLOR = 'rgb-color', // value: { color: [num, num, num], brightness?: number, transition?: number, duration?: number }
+    HEX_COLOR = 'hex-color',
+    CHAT_COMMAND = 'chat-command',
+    TWITCH_POINTS = 'twitch-points',
+    TWITCH_EXTENSION = 'twitch-extension',
+    TROVO_SPELLS = 'trovo-spells',
+    STUDIO_SCENE = 'studio-scene',
+    STUDIO_ANIMATION = 'studio-animation',
+    STUDIO_THEME = 'studio-theme',
+    CHATBOT_MESSAGE = 'chatbot-messsage',
+    TTS = 'tts',
+}
+
+export enum LumiaSDKAlertValues {
+    TWITCH_FOLLOWER = 'twitch-follower',
+    TWITCH_SUBSCRIBER = 'twitch-subscriber',
+    TWITCH_BITS = 'twitch-bits',
+    TWITCH_HOST = 'twitch-host',
+    TWITCH_RAID = 'twitch-raid',
+    YOUTUBE_SUBSCRIBER = 'youtube-subscriber',
+    YOUTUBE_SUPERCHAT = 'youtube-superchat',
+    YOUTUBE_SUPERSTICKER = 'youtube-supersticker',
+    YOUTUBE_MEMBER = 'youtube-member',
+    FACEBOOK_FOLLOWER = 'facebook-follower',
+    FACEBOOK_REACTION = 'facebook-reaction',
+    FACEBOOK_STAR = 'facebook-star',
+    FACEBOOK_SUPPORT = 'facebook-support',
+    FACEBOOK_SHARE = 'facebook-share',
+    FACEBOOK_FAN = 'facebook-fan',
+    TROVO_FOLLOWER = 'trovo-follower',
+    TROVO_SUBSCRIBER = 'trovo-subscriber',
+    STREAMLABS_DONATION = 'streamlabs-donation',
+    STREAMLABS_MERCH = 'streamlabs-merch',
+    STREAMLABS_REDEMPTION = 'streamlabs-redemption',
+    STREAMLABS_PRIMEGIFT = 'streamlabs-primegift',
+    STREAMELEMENTS_DONATION = 'streamelements-donation',
+    OBS_SWITCHPROFILE = 'obs-switchProfile',
+    OBS_SWITCHSCENE = 'obs-switchScene',
+    OBS_SWITCH_transition = 'obs-switch-transition',
+    OBS_STREAMSTARTING = 'obs-streamStarting',
+    OBS_STREAMSTOPPING = 'obs-streamStopping',
+    SLOBS_SWITCHSCENE = 'slobs-switchScene',
+    TREATSTREAM_TREAT = 'treatstream-treat',
+    PULSE_HEARTRATE = 'pulse-heartrate',
+    PULSE_CALORIES = 'pulse-calories',
+}

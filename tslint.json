@@ -1,0 +1,47 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-eslint-rules"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"rules": {
+		"arrow-parens": true,
+		"arrow-return-shorthand": true,
+		"callable-types": false,
+		"curly": false,
+		"defaultSeverity": "warning",
+		"forin": false,
+		"indent": [true, "tabs", 2],
+		"jsx-alignment": false,
+		"jsx-boolean-value": 1,
+		"jsx-curly-spacing": 1,
+		"jsx-key": 1,
+		"jsx-no-lambda": false,
+		"linebreak-style": [true, "unix"],
+		"max-classes-per-file": false,
+		"member-access": false,
+		"no-console": false,
+		"no-debugger": false,
+		"no-empty": false,
+		"no-irregular-whitespace": true,
+		"no-unnecessary-initializer": true,
+		"no-unused-expression": false,
+		"no-unused-variable": false,
+		"object-curly-spacing": [true, "always"],
+		"object-literal-sort-keys": false,
+		"ordered-imports": false,
+		"prefer-conditional-expression": [true, "check-else-if"],
+		"prefer-object-spread": true,
+		"quotemark": [true, "single", "avoid-escape", "avoid-template"],
+		"semicolon": [true, "always", "ignore-bound-class-methods"],
+		"variable-name": false
+	}
+}
