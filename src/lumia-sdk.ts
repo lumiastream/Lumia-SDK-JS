@@ -193,12 +193,24 @@ export default class LumiaSdk extends EventEmitter {
 		});
 	};
 
+	// Sends command
+	sendCommand = async (pack: { command: string; default?: boolean; skipQueue?: boolean }) => {
+		return this.send({
+			type: LumiaSDKCommandTypes.CHAT_COMMAND,
+			params: {
+				value: pack.command,
+				hold: pack.default,
+				skipQueue: pack.skipQueue,
+			},
+		});
+	};
+
 	// Sends a color pack
 	sendColor = async (pack: {
 		color?: { r: number; g: number; b: number };
-		brightness?: number;
-		duration?: number;
-		transition?: number;
+		brightness?: number; // 0-100
+		duration?: number; // In milliseconds
+		transition?: number; // In milliseconds
 		default?: boolean;
 		skipQueue?: boolean;
 		lights: Array<ILumiaSdkLight>;
@@ -225,18 +237,6 @@ export default class LumiaSdk extends EventEmitter {
 				value: null,
 				brightness: pack.brightness,
 				transition: pack.transition,
-				skipQueue: pack.skipQueue,
-			},
-		});
-	};
-
-	// Sends command
-	sendCommand = async (pack: { command: string; default?: boolean; skipQueue?: boolean }) => {
-		return this.send({
-			type: LumiaSDKCommandTypes.CHAT_COMMAND,
-			params: {
-				value: pack.command,
-				hold: pack.default,
 				skipQueue: pack.skipQueue,
 			},
 		});

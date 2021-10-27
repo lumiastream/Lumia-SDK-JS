@@ -23,7 +23,7 @@ const appName = 'lumia-test';
 			}
 		});
 
-		function testSends() {
+		async function testSends() {
 			// Sending an alert event example
 			await sdk.sendAlert({
 				alert: LumiaSDKAlertValues.TWITCH_FOLLOWER,
