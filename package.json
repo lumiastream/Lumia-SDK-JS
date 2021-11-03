@@ -1,45 +1,51 @@
 {
-    "name": "@lumiastream/lumia-sdk-js",
-    "version": "0.0.1",
-    "private": false,
-    "description": "",
-    "main": "./lib/cjs/index.js",
-    "module": "./lib/esm/index.js",
-    "types": "./lib/esm/index.d.ts",
-    "files": [
-        "/lib"
-    ],
-    "directories": {
-        "test": "test"
-    },
-    "author": "",
-    "license": "ISC",
-    "scripts": {
-        "build": "npm run clean && tsc && tsc --module commonjs --outDir lib/cjs",
-        "prepublishOnly": "npm run build",
-        "lint": "tslint --project tsconfig.json \"src/**/*.ts\"",
-        "lint:fix": "tslint --project tsconfig.json --fix \"src/**/*.ts\"",
-        "clean": "rm -rf lib lib/esm lib/cjs"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/lumiastream/lumia-sdk-js.git"
-    },
-    "bugs": {
-        "url": "https://github.com/lumiastream/lumia-sdk-js/issues"
-    },
-    "homepage": "https://github.com/lumiastream/lumia-sdk-js#readme",
-    "dependencies": {
-        "axios": "^0.21.1",
-        "sockette": "^2.0.6"
-    },
-    "devDependencies": {
-        "@types/node": "^14.14.13",
-        "ts-node": "9.1.1",
-        "tslib": "^2.3.0",
-        "typescript": "4.1.3"
-    },
-    "optionalDependencies": {
-        "ws": "^8.0.0"
-    }
+	"name": "@lumiastream/sdk",
+	"version": "0.0.1",
+	"private": false,
+	"description": "",
+	"main": "./lib/cjs/index.js",
+	"module": "./lib/esm/index.js",
+	"types": "./lib/esm/index.d.ts",
+	"files": [
+		"/lib"
+	],
+	"directories": {
+		"test": "test"
+	},
+	"author": {
+		"name": "Lumia Stream",
+		"email": "dev@lumiastream.com",
+		"url": "https://lumiastream.com"
+	},
+	"license": "Apache-2.0",
+	"scripts": {
+		"build": "npm run clean && tsc && tsc --module commonjs --outDir lib/cjs",
+		"bump": "bump --tag --push --all",
+		"prepublishOnly": "npm run build",
+		"lint": "tslint --project tsconfig.json \"src/**/*.ts\"",
+		"lint:fix": "tslint --project tsconfig.json --fix \"src/**/*.ts\"",
+		"clean": "rm -rf lib lib/esm lib/cjs"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lumiastream/lumia-sdk-js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/lumiastream/lumia-sdk-js/issues"
+	},
+	"homepage": "https://github.com/lumiastream/lumia-sdk-js#readme",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"sockette": "^2.0.6"
+	},
+	"devDependencies": {
+		"@jsdevtools/version-bump-prompt": "^6.1.0",
+		"@types/node": "^14.14.13",
+		"ts-node": "9.1.1",
+		"tslib": "^2.3.0",
+		"typescript": "4.1.3"
+	},
+	"optionalDependencies": {
+		"ws": "^8.0.0"
+	}
 }

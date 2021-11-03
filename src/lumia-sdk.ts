@@ -36,37 +36,42 @@ export default class LumiaSdk extends EventEmitter {
 
 	// Send a message to Lumia Stream with an initialization request
 	init = async (config?: { token: string; name?: string; host?: string }) => {
-		if (config?.token) {
-			this._data = {
-				...this._data,
-				...config,
-			};
-		}
+		try {
+			if (config?.token) {
+				this._data = {
+					...this._data,
+					...config,
+				};
+			}
 
-		await this._startWebsockets();
-		this._connected = true;
-		return true;
+			await this._startWebsockets();
+			this._connected = true;
+			return true;
+		} catch (err) {
+			this._connected = false;
+			return false;
+		}
 	};
 
 	// Gets information from lumia stream about settings
 	getInfo = async () => {
 		try {
 			const result = await this._sendWebsocketMessage({
-				method: 'sdk:getinfo',
+				retrieve: true,
+				method: 'retrieve',
 			});
 			return result;
 		} catch (err) {
-			return err.toString();
+			return new Error(err.message);
 		}
 	};
 
-	// Turns game mode on or off
 	stop = async () => {
 		clearInterval(this._heartbeatInterval);
 		clearTimeout(this._websocketConnectTimeout);
 		try {
 			await this._sendWebsocketMessage({
-				method: 'sdk:stop',
+				method: 'stop',
 			});
 		} catch (err) {}
 
@@ -75,11 +80,6 @@ export default class LumiaSdk extends EventEmitter {
 				this._websocket.close();
 			}
 		} catch (err) {
-			console.debug({
-				type: 'error',
-				title: 'Lumia-Stop-Websocket',
-				message: err,
-			});
 			this._websocket = null;
 		}
 
@@ -88,9 +88,9 @@ export default class LumiaSdk extends EventEmitter {
 	};
 
 	private _startWebsockets = () => {
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 			if (!this._data.token) {
-				throw new Error('No token has been set');
+				return reject('No token has been set');
 			}
 
 			if (this._websocket) {
@@ -100,7 +100,7 @@ export default class LumiaSdk extends EventEmitter {
 			// Timeout in case it can't connect in 3 seconds
 			this._websocketConnectTimeout = setTimeout(() => {
 				this._websocket.close();
-				throw new Error('Setup timed out. Could not connect');
+				return reject('Setup timed out. Could not connect');
 			}, 3000);
 
 			this._websocket = new Sockette(`${this._data.host}/api?token=${this._data.token}&name=${this._data.name}`, {
@@ -129,29 +129,34 @@ export default class LumiaSdk extends EventEmitter {
 						this.stop();
 					}
 				},
-				onerror: (event) => {
-					this.emit('error', event.target);
+				onerror: (event: any) => {
+					if (!this._connected) {
+						this.emit('unauthorized', 'token is invalid');
+						return reject('token is invalid');
+					} else {
+						this.emit('error', event.message);
+					}
 				},
 			});
 		});
 	};
 
 	// Handles incoming messages fulfilling the promise if it has one, otherwise checks the type of message
-	private _handleMessage = async (event: any) => {
+	private _handleMessage = async (message: any) => {
 		try {
-			const msg = JSON.parse(event.data);
+			const { context, event, ...msg } = JSON.parse(message.data);
 
-			if (msg.context) {
+			if (context) {
 				if (msg.status === 200 || !msg.status) {
-					this._promises[msg.context].resolve(msg);
+					this._promises[context].resolve(msg);
 				} else {
-					this._promises[msg.context].reject(msg);
+					this._promises[context].reject(msg);
 				}
 
 				return;
 			}
 
-			this.emit('event', msg);
+			this.emit('event', { event, ...msg });
 		} catch (err) {
 			this.emit('error', 'Handle Message err');
 		}
