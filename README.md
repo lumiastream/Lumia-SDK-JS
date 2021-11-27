@@ -8,28 +8,30 @@ Developers can use the Lumia Stream SDK to extend and control the Lumia Stream d
 
 <!-- toc -->
 
+- [The official Lumia Stream SDK for Javascript/Typescript](#the-official-lumia-stream-sdk-for-javascripttypescript)
+  - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [Run the SDK](#run-the-sdk)
 - [Sample](#sample)
 - [Run a mock server](#run-a-mock-server)
 - [Events](#events)
-  - [States](#states)
-  - [Chat Command](#chat-command)
-  - [Chat](#chat)
-  - [Alert](#alert)
+    - [States](#states)
+    - [Chat Command](#chat-command)
+    - [Chat](#chat)
+    - [Alert](#alert)
 - [Control](#control)
-  - [Get Settings](#get-settings)
-  - [Send Command](#send-command)
-  - [Send Color](#send-color)
-  - [Send Color to specific lights](#send-color-to-specific-lights)
-  - [Send Brightness](#send-brightness)
-  - [Send TTS](#send-tts)
-  - [Send Chat bot](#send-chat-bot)
-  - [Send Chat Command](#send-chat-command)
-  - [Send Chat](#send-chat)
-  - [Send Alert](#send-alert)
-- [Resources](#resources)
-- [Let's link](#lets-link)
+    - [Get Settings](#get-settings)
+    - [Send Command](#send-command)
+    - [Send Color](#send-color)
+    - [Send Color to specific lights](#send-color-to-specific-lights)
+    - [Send Brightness](#send-brightness)
+    - [Send TTS](#send-tts)
+    - [Send Chat bot](#send-chat-bot)
+    - [Send Chat Command](#send-chat-command)
+    - [Send Chat](#send-chat)
+    - [Send Alert](#send-alert)
+  - [Resources](#resources)
+  - [Let's link](#lets-link)
 
 <!-- tocstop -->
 
@@ -66,7 +68,7 @@ The following snippet shows a valid sdk example
 ```js
 "use strict";
 
-const { LumiaSdk, LumiaSDKCommandTypes, LumiaSDKAlertValues, LumiaSdkEventTypes } = require('@lumiastream/sdk');
+const { LumiaSdk, LumiaActivityCommandTypes, LumiaAlertValues, LumiaSdkEventTypes } = require('@lumiastream/sdk');
 
 const token = 'insert-token-here';
 const appName = 'lumia-test-sdk-js';

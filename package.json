@@ -1,6 +1,6 @@
 {
 	"name": "@lumiastream/sdk",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": false,
 	"description": "",
 	"main": "./lib/cjs/index.js",
@@ -35,6 +35,7 @@
 	},
 	"homepage": "https://github.com/lumiastream/lumia-sdk-js#readme",
 	"dependencies": {
+		"@lumiastream/lumia-types": "0.0.1",
 		"axios": "^0.21.1",
 		"sockette": "^2.0.6"
 	},

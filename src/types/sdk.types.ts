@@ -1,7 +1,7 @@
-import { LumiaSDKCommandTypes } from './sdk.constants';
+import { LumiaActivityCommandTypes } from '@lumiastream/lumia-types';
 
 export interface ILumiaSdkSendPack {
-	type: LumiaSDKCommandTypes;
+	type: LumiaActivityCommandTypes;
 	params: {
 		value: string | { r: number; g: number; b: number };
 		lights?: Array<ILumiaSdkLight>;
@@ -38,10 +38,12 @@ export interface ILumiaSdkEventChatCommandBody {
 export interface ILumiaSdkEventChatBody {
 	type: string;
 	data: {
+		id: string;
 		username: string;
 		userId: string;
 		userColor: string;
 		userColorRgb: string;
+		avatar: string;
 		platform: string;
 		badgesRaw: string;
 		hasEmotes: boolean;

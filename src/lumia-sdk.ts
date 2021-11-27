@@ -1,7 +1,7 @@
 import { ILumiaSdkLight, ILumiaSdkSendPack, Platforms } from './types/sdk.types';
 import Sockette from 'sockette';
 import { EventEmitter } from 'events';
-import { LumiaSDKAlertValues, LumiaSDKCommandTypes } from '.';
+import { LumiaAlertValues, LumiaActivityCommandTypes } from '.';
 
 // This will handle if Lumia-SDK is running in Node
 if (!globalThis.WebSocket) {
@@ -189,9 +189,9 @@ export default class LumiaSdk extends EventEmitter {
 		}
 	};
 
-	sendAlert = async (pack: { alert: LumiaSDKAlertValues }) => {
+	sendAlert = async (pack: { alert: LumiaAlertValues }) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.ALERT,
+			type: LumiaActivityCommandTypes.ALERT,
 			params: {
 				value: pack.alert,
 			},
@@ -201,7 +201,7 @@ export default class LumiaSdk extends EventEmitter {
 	// Sends command
 	sendCommand = async (pack: { command: string; default?: boolean; skipQueue?: boolean }) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.CHAT_COMMAND,
+			type: LumiaActivityCommandTypes.CHAT_COMMAND,
 			params: {
 				value: pack.command,
 				hold: pack.default,
@@ -221,7 +221,7 @@ export default class LumiaSdk extends EventEmitter {
 		lights: Array<ILumiaSdkLight>;
 	}) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.RGB_COLOR,
+			type: LumiaActivityCommandTypes.RGB_COLOR,
 			params: {
 				value: pack.color,
 				brightness: pack.brightness,
@@ -237,7 +237,7 @@ export default class LumiaSdk extends EventEmitter {
 	// Sends brightness only
 	sendBrightness = async (pack: { brightness: number; transition?: number; skipQueue?: boolean }) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.RGB_COLOR,
+			type: LumiaActivityCommandTypes.RGB_COLOR,
 			params: {
 				value: null,
 				brightness: pack.brightness,
@@ -250,7 +250,7 @@ export default class LumiaSdk extends EventEmitter {
 	// Sends tts
 	sendTts = async (pack: { text: string; volume?: number; voice?: string }) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.TTS,
+			type: LumiaActivityCommandTypes.TTS,
 			params: {
 				value: pack.text,
 				volume: pack.volume,
@@ -262,7 +262,7 @@ export default class LumiaSdk extends EventEmitter {
 	// Sends Chatbot message
 	sendChatbot = async (pack: { text: string; platform: Platforms }) => {
 		return this.send({
-			type: LumiaSDKCommandTypes.CHATBOT_MESSAGE,
+			type: LumiaActivityCommandTypes.CHATBOT_MESSAGE,
 			params: {
 				value: pack.text,
 				platform: pack.platform,

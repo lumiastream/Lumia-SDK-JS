@@ -1,5 +1,4 @@
-// const { LumiaSdk, LumiaSDKCommandTypes, LumiaSDKAlertValues, LumiaSdkEventTypes } = require('@lumiastream/sdk');
-const { LumiaSdk, LumiaSDKCommandTypes, LumiaSDKAlertValues, LumiaSdkEventTypes } = require('../lib/cjs');
+const { LumiaSdk, LumiaActivityCommandTypes, LumiaAlertValues, LumiaSdkEventTypes } = require('@lumiastream/sdk');
 
 const token = 'insert-token-here';
 const appName = 'lumia-test-sdk-js';
@@ -37,7 +36,7 @@ const appName = 'lumia-test-sdk-js';
 		async function testSends() {
 			// Sending an alert event example
 			await sdk.sendAlert({
-				alert: LumiaSDKAlertValues.TWITCH_FOLLOWER,
+				alert: LumiaAlertValues.TWITCH_FOLLOWER,
 			});
 
 			// Sending a command
@@ -70,8 +69,8 @@ const appName = 'lumia-test-sdk-js';
 
 			// Sending a raw event example
 			await sdk.send({
-				type: LumiaSDKCommandTypes.ALERT,
-				params: { value: LumiaSDKAlertValues.TWITCH_FOLLOWER },
+				type: LumiaActivityCommandTypes.ALERT,
+				params: { value: LumiaAlertValues.TWITCH_FOLLOWER },
 			});
 		}
 
