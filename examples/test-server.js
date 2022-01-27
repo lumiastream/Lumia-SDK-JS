@@ -1,33 +1,50 @@
 const WebSocket = require('ws');
+const mockRetrieve = require('./mocks');
 
 function StartServer() {
-	var server = new WebSocket.Server({ port: 39231 });
-	server.on('connection', (client, req) => {
-		console.log('New connetion');
-		client.on('message', (message) => {
-			console.log('Message received: ', message.toString());
-			client.send(JSON.stringify({ context: message.context, status: 200, message: 'success' }));
-		});
+    var server = new WebSocket.Server({ port: 39231 });
+    server.on('connection', (client, req) => {
+        console.log('New connetion');
+        client.on('message', (message) => {
+            message = message.toString();
+            console.log('Message received: ', message);
+            try {
+                message = JSON.parse(message);
+            } catch (_error) {}
 
-		// Send event to client
-		client.send(JSON.stringify({ type: 'chat/commands', value: 'red' }));
-		client.send(JSON.stringify({ type: 'chat/twitch', value: 'I said hope you love this' }));
+            if (message.retrieve) {
+                const pack = {
+                    event: 'socketapi:retrieve',
+                    context: message.context,
+                    data: {
+                        ...mockRetrieve.retrieve,
+                    },
+                };
+                client.send(JSON.stringify(pack));
+            }
+        });
 
-		client.on('close', (errno, message) => {
-			console.log('Server closed: ', errno, message);
-		});
+        // Send event to client
+        client.send(JSON.stringify({ ...mockRetrieve.stateUpdateMock }));
+        client.send(JSON.stringify({ ...mockRetrieve.alertMock }));
+        client.send(JSON.stringify({ ...mockRetrieve.chatCommand }));
+        client.send(JSON.stringify({ ...mockRetrieve.chatMock }));
 
-		client.on('error', (err) => {
-			console.log('Server error: ', err);
-		});
-	});
-	server.on('error', (error) => {
-		console.log('Server error: ', error.message);
-	});
+        client.on('close', (errno, message) => {
+            console.log('Server closed: ', errno, message);
+        });
 
-	server.on('close', () => {
-		console.log('Server closing connection');
-	});
+        client.on('error', (err) => {
+            console.log('Server error: ', err);
+        });
+    });
+    server.on('error', (error) => {
+        console.log('Server error: ', error.message);
+    });
+
+    server.on('close', () => {
+        console.log('Server closing connection');
+    });
 }
 
 StartServer();
