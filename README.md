@@ -47,7 +47,7 @@ npm i @lumiastream/sdk
 
 We've also included an example for using the SDK.
 
-To run the example head to [examples](https://github.com/lumiastream/Lumia-SDK-JS/examples) and you will see the `basic-example.js` file there.
+To run the example head to [examples](https://github.com/lumiastream/Lumia-SDK-JS/tree/main/examples) and you will see the `basic-example.js` file there.
 
 Make sure you replace your token with the token that you will find in Lumia Stream's settings.
 Here is how to [find your API token](https://dev.lumiastream.com/docs/get-a-token)
@@ -114,7 +114,7 @@ const appName = 'lumia-test-sdk-js';
 
 Included in the SDK is a mock server that you can run to test things out without needing Lumia Stream
 
-To run the server head to [examples](https://github.com/lumiastream/Lumia-SDK-JS/examples) and you will see the `test-server.js` file there.
+To run the server head to [examples](https://github.com/lumiastream/Lumia-SDK-JS/tree/main/examples) and you will see the `test-server.js` file there.
 Now run:
 
 ```bash
@@ -441,8 +441,8 @@ await sdk.sendAlert({ alert: LumiaSDKAlertValues.TWITCH_FOLLOWER });
 
 - [Download the latest Lumia Stream SDK release](https://github.com/lumiastream/Lumia-SDK-JS/releases)
 - [Read the full API reference](https://dev.lumiastream.com)
-- [Run a mock server](https://github.com/lumiastream/Lumia-SDK-JS/examples)
-- [Browse some examples](https://github.com/lumiastream/Lumia-SDK-JS/examples)
+- [Run a mock server](https://github.com/lumiastream/Lumia-SDK-JS/tree/main/examples)
+- [Browse some examples](https://github.com/lumiastream/Lumia-SDK-JS/tree/main/examples)
 
 ## Let's link
 
