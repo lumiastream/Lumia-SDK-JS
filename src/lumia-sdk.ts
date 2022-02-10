@@ -1,12 +1,11 @@
-import { ILumiaSdkLight, ILumiaSdkSendPack, Platforms } from './types/sdk.types';
 import Sockette from 'sockette';
 import { EventEmitter } from 'events';
 import { LumiaAlertValues, LumiaActivityCommandTypes } from '.';
+import { ILumiaLight, ILumiaSendPack, LumiaPlatforms } from '@lumiastream/lumia-types';
 
 // This will handle if Lumia-SDK is running in Node
 if (!globalThis.WebSocket) {
     const WebSocket = require('ws');
-
     globalThis.WebSocket = WebSocket;
 }
 
@@ -18,12 +17,14 @@ export default class LumiaSdk extends EventEmitter {
     private _heartbeatInterval: ReturnType<typeof setInterval>;
     private _promises = {};
     private _data = {
-        host: 'ws://localhost:39231',
+        host: 'localhost',
+        port: 39231,
         name: null,
         token: null,
+        timeout: 30000, // Wait 30 seconds when connecting before the game is approved or denied
     };
 
-    constructor(config?: { token: string; name?: string; host?: string }) {
+    constructor(config?: { token: string; name?: string; host?: string; port?: number; timeout?: number }) {
         super();
 
         this._data = {
@@ -35,7 +36,7 @@ export default class LumiaSdk extends EventEmitter {
     }
 
     // Send a message to Lumia Stream with an initialization request
-    init = async (config?: { token: string; name?: string; host?: string }) => {
+    init = async (config?: { token: string; name?: string; host?: string; port?: number; timeout?: number }) => {
         try {
             if (config?.token) {
                 this._data = {
@@ -101,9 +102,9 @@ export default class LumiaSdk extends EventEmitter {
             this._websocketConnectTimeout = setTimeout(() => {
                 this._websocket.close();
                 return reject('Setup timed out. Could not connect');
-            }, 3000);
+            }, this._data.timeout);
 
-            this._websocket = new Sockette(`${this._data.host}/api?token=${this._data.token}&name=${this._data.name}`, {
+            this._websocket = new Sockette(`ws://${this._data.host}:${this._data.port}/api?token=${this._data.token}&name=${this._data.name}`, {
                 timeout: 5000,
                 // maxAttempts: 5, // When disabled it uses infinity
                 onopen: async (e) => {
@@ -174,7 +175,7 @@ export default class LumiaSdk extends EventEmitter {
     };
 
     // Sends a raw pack without any massaging
-    send = async (pack: ILumiaSdkSendPack) => {
+    send = async (pack: ILumiaSendPack) => {
         try {
             // sdk:send
             const result = await this._sendWebsocketMessage({
@@ -218,7 +219,7 @@ export default class LumiaSdk extends EventEmitter {
         transition?: number; // In milliseconds
         default?: boolean;
         skipQueue?: boolean;
-        lights: Array<ILumiaSdkLight>;
+        lights: Array<ILumiaLight>;
     }) => {
         return this.send({
             type: LumiaActivityCommandTypes.RGB_COLOR,
@@ -260,12 +261,71 @@ export default class LumiaSdk extends EventEmitter {
     };
 
     // Sends Chatbot message
-    sendChatbot = async (pack: { text: string; platform: Platforms }) => {
+    sendChatbot = async (pack: { text: string; platform: LumiaPlatforms }) => {
         return this.send({
             type: LumiaActivityCommandTypes.CHATBOT_MESSAGE,
             params: {
                 value: pack.text,
                 platform: pack.platform,
+            },
+        });
+    };
+
+    // Games Glow Functions
+
+    // Gets information from lumia stream about games glow settings that the user has input
+    getGamesGlowSettings = async () => {
+        try {
+            const result = await this._sendWebsocketMessage({
+                method: 'gamesGlowSettings',
+                gamesGlowName: this._data.name,
+            });
+            return result;
+        } catch (err) {
+            return new Error(err.message);
+        }
+    };
+
+    sendGamesGlowAlert = async (pack: { glowId: string; value: any }) => {
+        return this.send({
+            type: LumiaActivityCommandTypes.GAMESGLOW_ALERT,
+            gamesGlowName: this._data.name,
+            glowId: pack.glowId,
+            params: {
+                value: pack.value,
+            },
+        });
+    };
+
+    sendGamesGlowCommand = async (pack: { glowId: string; value: any }) => {
+        return this.send({
+            type: LumiaActivityCommandTypes.GAMESGLOW_COMMAND,
+            gamesGlowName: this._data.name,
+            glowId: pack.glowId,
+            params: {
+                value: pack.value,
+            },
+        });
+    };
+
+    sendGamesGlowVariableUpdate = async (pack: { glowId: string; value: any }) => {
+        return this.send({
+            type: LumiaActivityCommandTypes.GAMESGLOW_VARIABLE,
+            gamesGlowName: this._data.name,
+            glowId: pack.glowId,
+            params: {
+                value: pack.value,
+            },
+        });
+    };
+
+    sendGamesGlowVirtualLightsChange = async (pack: { glowId: string; value: any }) => {
+        return this.send({
+            type: LumiaActivityCommandTypes.GAMESGLOW_VIRTUALLIGHT,
+            gamesGlowName: this._data.name,
+            glowId: pack.glowId,
+            params: {
+                value: pack.value,
             },
         });
     };

@@ -1,5 +1,4 @@
 import LumiaSdk from './lumia-sdk';
-import { LumiaAlertValues, LumiaActivityCommandTypes } from '@lumiastream/lumia-types';
-import { LumiaSdkEventTypes } from './types/sdk.types';
+import { LumiaAlertValues, LumiaEventTypes, LumiaActivityCommandTypes } from '@lumiastream/lumia-types';
 
-export { LumiaSdk, LumiaSdkEventTypes, LumiaAlertValues, LumiaActivityCommandTypes };
+export { LumiaSdk, LumiaAlertValues, LumiaEventTypes, LumiaActivityCommandTypes };
