@@ -1,9 +1,7 @@
-const { LumiaSdk, LumiaActivityCommandTypes, LumiaAlertValues, LumiaEventTypes } = require('@lumiastream/sdk');
+const { LumiaSdk, LumiaEventTypes } = require('@lumiastream/sdk');
 
-const token = 'ls_krgorcfplh';
-const appName = 'gtav_lumia';
-// const token = 'insert_token_here';
-// const appName = 'my_game';
+const token = 'insert_token_here';
+const appName = 'my_game';
 
 (async () => {
     sdk = new LumiaSdk();

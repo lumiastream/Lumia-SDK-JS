@@ -134,7 +134,7 @@ An event message will contain at least the following base fields:
 
 -   `type` _LumiaEventTypes_: the type of event.
 -   `origin` _EventOrigins (optional)_: where the event originated from. i.e: twitch for example
--   `data` _ILumiaSdkEventStateBody | ILumiaSdkEventChatCommandBody | ILumiaSdkEventChatBody | ILumiaSdkEventAlertBody | ILumiaSdkEventStateBody (optional)_: the body of the event
+-   `data` _ILumiaEventStateBody | ILumiaEventChatCommandBody | ILumiaEventChatBody | ILumiaEventAlertBody | ILumiaEventStateBody (optional)_: the body of the event
 
 Additional fields may be present in the event message depending on the event type.
 
@@ -432,7 +432,7 @@ Send a mock alert
 **Example:**
 
 ```javascript
-await sdk.sendAlert({ alert: LumiaSDKAlertValues.TWITCH_FOLLOWER });
+await sdk.sendAlert({ alert: LumiaAlertValues.TWITCH_FOLLOWER });
 ```
 
 ---
