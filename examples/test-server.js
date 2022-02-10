@@ -24,19 +24,24 @@ function StartServer() {
             }
         });
 
-        // Send event to client
-        setTimeout(() => {
-            client.send(JSON.stringify({ ...mockRetrieve.stateUpdateMock }));
-        }, 1000);
-        setTimeout(() => {
-            client.send(JSON.stringify({ ...mockRetrieve.alertMock }));
-        }, 3000);
-        setTimeout(() => {
-            client.send(JSON.stringify({ ...mockRetrieve.chatCommand }));
-        }, 5000);
-        setTimeout(() => {
-            client.send(JSON.stringify({ ...mockRetrieve.chatMock }));
-        }, 7000);
+        sendEvents = () => {
+            // Send event to client
+            setTimeout(() => {
+                client.send(JSON.stringify({ ...mockRetrieve.stateUpdateMock }));
+            }, 1000);
+            setTimeout(() => {
+                client.send(JSON.stringify({ ...mockRetrieve.alertMock }));
+            }, 3000);
+            setTimeout(() => {
+                client.send(JSON.stringify({ ...mockRetrieve.chatCommand }));
+            }, 5000);
+            setTimeout(() => {
+                client.send(JSON.stringify({ ...mockRetrieve.chatMock }));
+            }, 7000);
+        };
+
+        sendEvents();
+        setInterval(sendEvents, 20000);
 
         client.on('close', (errno, message) => {
             console.log('Server closed: ', errno, message);
