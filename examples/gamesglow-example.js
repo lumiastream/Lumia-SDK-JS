@@ -35,8 +35,8 @@ const appName = 'my_game';
         async function testSends() {
             // Sending an alert event example
             await sdk.sendGamesGlowAlert({
-                glowId: 'gtav_lumia__wanted',
-                value: 2,
+                gamesGlowKey: 'gtav_lumia__horn',
+                value: true,
             });
 
             // Sending a variable update

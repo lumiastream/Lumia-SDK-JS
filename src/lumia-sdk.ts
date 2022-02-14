@@ -278,7 +278,7 @@ export default class LumiaSdk extends EventEmitter {
         try {
             const result = await this._sendWebsocketMessage({
                 method: 'gamesGlowSettings',
-                gamesGlowName: this._data.name,
+                gamesGlowId: this._data.name,
             });
             return result;
         } catch (err) {
@@ -286,44 +286,44 @@ export default class LumiaSdk extends EventEmitter {
         }
     };
 
-    sendGamesGlowAlert = async (pack: { glowId: string; value: any }) => {
+    sendGamesGlowAlert = async (pack: { gamesGlowKey: string; value: any }) => {
         return this.send({
             type: LumiaActivityCommandTypes.GAMESGLOW_ALERT,
-            gamesGlowName: this._data.name,
-            glowId: pack.glowId,
+            gamesGlowId: this._data.name,
+            gamesGlowKey: pack.gamesGlowKey,
             params: {
                 value: pack.value,
             },
         });
     };
 
-    sendGamesGlowCommand = async (pack: { glowId: string; value: any }) => {
+    sendGamesGlowCommand = async (pack: { gamesGlowKey: string; value: any }) => {
         return this.send({
             type: LumiaActivityCommandTypes.GAMESGLOW_COMMAND,
-            gamesGlowName: this._data.name,
-            glowId: pack.glowId,
+            gamesGlowId: this._data.name,
+            gamesGlowKey: pack.gamesGlowKey,
             params: {
                 value: pack.value,
             },
         });
     };
 
-    sendGamesGlowVariableUpdate = async (pack: { glowId: string; value: any }) => {
+    sendGamesGlowVariableUpdate = async (pack: { gamesGlowKey: string; value: any }) => {
         return this.send({
             type: LumiaActivityCommandTypes.GAMESGLOW_VARIABLE,
-            gamesGlowName: this._data.name,
-            glowId: pack.glowId,
+            gamesGlowId: this._data.name,
+            gamesGlowKey: pack.gamesGlowKey,
             params: {
                 value: pack.value,
             },
         });
     };
 
-    sendGamesGlowVirtualLightsChange = async (pack: { glowId: string; value: any }) => {
+    sendGamesGlowVirtualLightsChange = async (pack: { gamesGlowKey: string; value: any }) => {
         return this.send({
             type: LumiaActivityCommandTypes.GAMESGLOW_VIRTUALLIGHT,
-            gamesGlowName: this._data.name,
-            glowId: pack.glowId,
+            gamesGlowId: this._data.name,
+            gamesGlowKey: pack.gamesGlowKey,
             params: {
                 value: pack.value,
             },
