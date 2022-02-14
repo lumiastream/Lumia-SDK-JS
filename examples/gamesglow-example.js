@@ -14,7 +14,7 @@ const appName = 'my_game';
             console.log('Event data: ', data);
             switch (data.type) {
                 case LumiaEventTypes.CHAT: {
-                    console.log('New chat message', data);
+                    // console.log('New chat message', data);
                     break;
                 }
                 case LumiaEventTypes.GAMESGLOW_ALERT: {
@@ -23,6 +23,12 @@ const appName = 'my_game';
                 }
                 case LumiaEventTypes.GAMESGLOW_COMMAND: {
                     console.log('New gamesglow command', data);
+                    // Check to see if this is the game the command was meant for
+                    if (data.gamesGlowId !== appName) {
+                        return;
+                    }
+                    const { gamesGlowId, gamesGlowKey, value } = data.data;
+
                     break;
                 }
                 case LumiaEventTypes.GAMESGLOW_VIRTUALLIGHT: {
@@ -41,7 +47,7 @@ const appName = 'my_game';
 
             // Sending a variable update
             await sdk.sendGamesGlowVariableUpdate({
-                command: 'gtav_lumia__var_in_vehicle',
+                gamesGlowKey: 'gtav_lumia__var_in_vehicle',
                 value: true,
             });
         }
