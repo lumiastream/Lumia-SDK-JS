@@ -27,15 +27,16 @@ function StartServer() {
         sendEvents = () => {
             // Send event to client
             client.send(JSON.stringify({ ...mockRetrieve.chatMock }));
+            client.send(JSON.stringify({ ...mockRetrieve.gamesGlowMinecraftVirtualLight }));
             setTimeout(() => {
                 client.send(JSON.stringify({ ...mockRetrieve.gamesGlowMinecraftJumpCommand }));
             }, 1000);
             setTimeout(() => {
-                client.send(JSON.stringify({ ...mockRetrieve.gamesGlowMinecraftColorCommand }));
-            }, 2000);
-            setTimeout(() => {
                 client.send(JSON.stringify({ ...mockRetrieve.gamesGlowMinecraftHealCommand }));
             }, 3000);
+            setTimeout(() => {
+                client.send(JSON.stringify({ ...mockRetrieve.gamesGlowMinecraftColorCommand }));
+            }, 5000);
         };
 
         sendEvents();

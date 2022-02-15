@@ -702,6 +702,15 @@ module.exports = {
             value: '50',
         },
     },
+    gamesGlowVirtualLight: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'gtav_lumia',
+            gamesGlowKey: 'gtav_lumia__light_full_car_color',
+            value: { brightness: 100, color: { r: 250, g: 5, b: 100 }, transition: 400 },
+        },
+    },
     gamesGlowMinecraftColorCommand: {
         event: undefined,
         type: 'gamesglow_command',
@@ -727,6 +736,15 @@ module.exports = {
             gamesGlowId: 'minecraft_lumia',
             gamesGlowKey: 'minecraft_lumia__jump',
             value: null,
+        },
+    },
+    gamesGlowMinecraftVirtualLight: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'minecraft_lumia',
+            gamesGlowKey: 'minecraft_lumia__hud_color',
+            value: { brightness: 100, color: { r: 250, g: 5, b: 100 }, transition: 400 },
         },
     },
 };
