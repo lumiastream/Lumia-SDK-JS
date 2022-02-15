@@ -684,4 +684,49 @@ module.exports = {
             emotesRaw: '',
         },
     },
+    gamesGlowGtaColorCommand: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'gtav_lumia',
+            gamesGlowKey: 'gtav_lumia__car_color',
+            value: '#ff00ff',
+        },
+    },
+    gamesGlowGtaHealCommand: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'gtav_lumia',
+            gamesGlowKey: 'gtav_lumia__heal_player',
+            value: '50',
+        },
+    },
+    gamesGlowMinecraftColorCommand: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'minecraft_lumia',
+            gamesGlowKey: 'minecraft_lumia__color',
+            value: '#ff00ff',
+        },
+    },
+    gamesGlowMinecraftHealCommand: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'minecraft_lumia',
+            gamesGlowKey: 'minecraft_lumia__heal_self',
+            value: '2',
+        },
+    },
+    gamesGlowMinecraftJumpCommand: {
+        event: undefined,
+        type: 'gamesglow_command',
+        data: {
+            gamesGlowId: 'minecraft_lumia',
+            gamesGlowKey: 'minecraft_lumia__jump',
+            value: null,
+        },
+    },
 };
