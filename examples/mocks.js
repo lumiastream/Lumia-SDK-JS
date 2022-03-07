@@ -740,7 +740,7 @@ module.exports = {
     },
     gamesGlowMinecraftVirtualLight: {
         event: undefined,
-        type: 'gamesglow_command',
+        type: 'gamesglow_virtuallight',
         data: {
             gamesGlowId: 'minecraft_lumia',
             gamesGlowKey: 'minecraft_lumia__hud_color',

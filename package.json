@@ -35,7 +35,7 @@
     },
     "homepage": "https://github.com/lumiastream/lumia-sdk-js#readme",
     "dependencies": {
-        "@lumiastream/lumia-types": "0.2.1-beta.3",
+        "@lumiastream/lumia-types": "0.2.1-beta.5",
         "axios": "0.25.0",
         "sockette": "^2.0.6"
     },

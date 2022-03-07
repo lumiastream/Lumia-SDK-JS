@@ -1,7 +1,10 @@
 const { LumiaSdk, LumiaEventTypes } = require('@lumiastream/sdk');
 
-const token = 'insert_token_here';
-const appName = 'my_game';
+// const token = 'insert_token_here';
+// const appName = 'my_game';
+
+const token = 'ls_krgorcfplh';
+const appName = 'gtav_lumia';
 
 (async () => {
     sdk = new LumiaSdk();
@@ -43,15 +46,15 @@ const appName = 'my_game';
 
         async function testSends() {
             // Sending an alert event example
-            await sdk.sendGamesGlowAlert({
-                gamesGlowKey: 'gtav_lumia__horn',
-                value: true,
-            });
+            // await sdk.sendGamesGlowAlert({
+            //     gamesGlowKey: 'gtav_lumia__horn',
+            //     value: true,
+            // });
 
             // Sending a variable update
             await sdk.sendGamesGlowVariableUpdate({
                 gamesGlowKey: 'gtav_lumia__var_in_vehicle',
-                value: true,
+                value: false,
             });
         }
 
