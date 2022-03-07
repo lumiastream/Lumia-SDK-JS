@@ -33,6 +33,9 @@ const appName = 'my_game';
                 }
                 case LumiaEventTypes.GAMESGLOW_VIRTUALLIGHT: {
                     console.log('New gamesglow virtual light', data);
+
+                    const { gamesGlowId, gamesGlowKey, value } = data.data;
+
                     break;
                 }
             }
