@@ -1,6 +1,6 @@
 {
     "name": "@lumiastream/sdk",
-    "version": "0.1.1",
+    "version": "0.1.5",
     "private": false,
     "description": "",
     "main": "./lib/cjs/index.js",
@@ -19,7 +19,7 @@
     },
     "license": "Apache-2.0",
     "scripts": {
-        "build": "npm run clean && tsc && tsc --module commonjs --outDir lib/cjs",
+        "build": "npm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
         "bump": "bump --tag --push --all",
         "prepublishOnly": "npm run build",
         "lint": "tslint --project tsconfig.json \"src/**/*.ts\"",
@@ -35,7 +35,7 @@
     },
     "homepage": "https://github.com/lumiastream/lumia-sdk-js#readme",
     "dependencies": {
-        "@lumiastream/lumia-types": "0.2.1-beta.5",
+        "@lumiastream/lumia-types": "0.2.1",
         "axios": "0.25.0",
         "sockette": "^2.0.6"
     },
