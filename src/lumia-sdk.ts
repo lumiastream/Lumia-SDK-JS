@@ -212,6 +212,30 @@ export default class LumiaSdk extends EventEmitter {
     };
 
     // Sends a color pack
+    sendHexColor = async (pack: {
+        color?: string;
+        brightness?: number; // 0-100
+        duration?: number; // In milliseconds
+        transition?: number; // In milliseconds
+        default?: boolean;
+        skipQueue?: boolean;
+        lights: Array<ILumiaLight>;
+    }) => {
+        return this.send({
+            type: LumiaActivityCommandTypes.HEX_COLOR,
+            params: {
+                value: pack.color,
+                brightness: pack.brightness,
+                transition: pack.transition,
+                duration: pack.duration,
+                skipQueue: pack.skipQueue,
+                hold: pack.default,
+                lights: pack.lights,
+            },
+        });
+    };
+
+    // Sends a color pack
     sendColor = async (pack: {
         color?: { r: number; g: number; b: number };
         brightness?: number; // 0-100
