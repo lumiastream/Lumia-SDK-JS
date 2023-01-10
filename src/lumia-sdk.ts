@@ -21,6 +21,8 @@ export default class LumiaSdk extends EventEmitter {
 		port: 39231,
 		name: null,
 		token: null,
+		endpoint: 'api',
+		deck: false,
 		timeout: 30000, // Wait 30 seconds when connecting before the game is approved or denied
 	};
 
@@ -104,7 +106,14 @@ export default class LumiaSdk extends EventEmitter {
 				return reject('Setup timed out. Could not connect');
 			}, this._data.timeout);
 
-			this._websocket = new Sockette(`ws://${this._data.host}:${this._data.port}/api?token=${this._data.token}&name=${this._data.name}`, {
+			let url = `ws://${this._data.host}`;
+			if (this._data.deck) {
+				url += `:39222?token=${this._data.token}&origin=${this._data.name}&name=${this._data.name}`;
+			} else {
+				url += `:${this._data.port}/${this._data.endpoint}?token=${this._data.token}&name=${this._data.name}`;
+			}
+
+			this._websocket = new Sockette(url, {
 				timeout: 5000,
 				// maxAttempts: 5, // When disabled it uses infinity
 				onopen: async (e) => {
@@ -179,7 +188,7 @@ export default class LumiaSdk extends EventEmitter {
 		try {
 			// sdk:send
 			const result = await this._sendWebsocketMessage({
-				lsorigin: 'lumia-sdk',
+				lsorigin: this._data.name,
 				...pack,
 			});
 			this.emit('sent:message', result);

@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "@lumiastream/lumia-types": "0.2.73",
-    "@lumiastream/sdk": "0.2.2"
+    "@lumiastream/sdk": "0.2.3"
   }
 }
